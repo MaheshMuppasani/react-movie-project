@@ -16,7 +16,12 @@ export function HomePage(props) {
   },[])
 
   function renderReviewList(){
-    return props.reviewList.map(review => <Review review = {review} key = {review.id} />)
+    return props.reviewList.sort((review1, review2) => {
+      const date1 = review1.publication_date ? review1.publication_date.split('-') : 0;
+      const date2 = review2.publication_date ? review2.publication_date.split('-') : 0;
+      
+      return (new Date(date2)).valueOf() - (new Date(date1)).valueOf();
+    }).map(review => <Review review = {review} key = {review.id} />)
   }
 
   const reviewList = renderReviewList();
