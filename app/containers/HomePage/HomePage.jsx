@@ -6,6 +6,7 @@ import { Switch, Route, useHistory } from 'react-router-dom'
 
 import hesImg from 'images/hes.png'
 import { getMovieReviews } from 'resources/reviews/reviews.actions'
+import Review from '../App/components/review'
 
 export function HomePage(props) {
   const history = useHistory()
@@ -14,6 +15,12 @@ export function HomePage(props) {
     props.getMovieReviews()
   },[])
 
+  function renderReviewList(){
+    return props.reviewList.map(review => <Review review = {review} key = {review.id} />)
+  }
+
+  const reviewList = renderReviewList();
+
   return (
     <div>
       <Helmet>
@@ -21,14 +28,16 @@ export function HomePage(props) {
       </Helmet>
       <main>
         <img src={hesImg} />
-        <h1>I am no Jedi.</h1>
-        <p>&mdash; Ahsoka Tano</p>
       </main>
+      <div>{reviewList}</div>
     </div>
   )
 }
 
-const mapStateToProps = (state, ownProps) => {}
+const mapStateToProps = ( { resources: { reviews } } , ownProps) => ({
+  reviewList: reviews.data,
+  error: reviews.error
+});
 
 const mapDispatchToProps = dispatch => ({
   getMovieReviews: () => dispatch(getMovieReviews()),
