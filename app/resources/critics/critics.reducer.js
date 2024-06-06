@@ -1,22 +1,20 @@
-import { REVIEWS_FETCH_FAILURE, REVIEWS_FETCH_SUCCESS } from "./reviews.actions";
+import { CRITICS_FETCH_FAILURE, CRITICS_FETCH_SUCCESS } from "./critics.actions";
 import 'lodash';
 
 const initialState = {
   data: [],
   error: null,
-  MPAA_options: []
 }
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case REVIEWS_FETCH_SUCCESS:
+    case CRITICS_FETCH_SUCCESS:
       return {
         ...state,
         data: action.payload,
-        error: null,
-        MPAA_options: _.uniq(action.payload.map(review => review.mpaa_rating))
+        error: null
       }
-    case REVIEWS_FETCH_FAILURE:
+    case CRITICS_FETCH_FAILURE:
       return {
         ...state,
         data: [],
