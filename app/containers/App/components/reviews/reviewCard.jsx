@@ -30,8 +30,8 @@ const ReviewCard = (props) => {
 }
 
 const styledReview = styled(ReviewCard)`
-    // width: 400px;
     max-height: 400px;
+    max-width: 350px;
     cursor: pointer;
     padding: 1rem;
     color: black;
@@ -46,6 +46,7 @@ const styledReview = styled(ReviewCard)`
     img{
         height: unset;
         width: 100%;
+        object-fit: cover;
     }
     :hover {
         box-shadow: 5px 5px 5px 2px rgb(51 51 51 / 27%);
